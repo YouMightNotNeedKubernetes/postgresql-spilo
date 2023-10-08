@@ -30,6 +30,9 @@ services:
       - PGVERSION=15
       - PGROOT=/home/postgres/pgdata/pgroot
       - "SPILO_CONFIGURATION={bootstrap: {initdb: [{auth-host: md5}, {auth-local: trust}]}}"
+    ports:
+      - 8008:8008
+      - 5432:5432
     networks:
       - postgres_default
       - etcd_area_lan
