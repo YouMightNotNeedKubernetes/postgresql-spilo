@@ -1,0 +1,51 @@
+x-deploy: &x-default-deploy
+  replicas: ${PGSQL_REPLICAS:-3}
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    max_attempts: 3
+    window: 120s
+  update_config:
+    parallelism: 1
+    delay: 10s
+    order: stop-first
+  rollback_config:
+    parallelism: 1
+    delay: 10s
+    order: stop-first
+
+x-logging: &x-default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: ghcr.io/zalando/spilo-15:3.0-p1
+    hostname: postgres-spilo15-{{.Task.Slot}}
+    env_file: .env
+    environment:
+      - SCOPE=${SCOPE:-postgres-default}
+      - PGVERSION=15
+      - PGROOT=/home/postgres/pgdata/pgroot
+      - "SPILO_CONFIGURATION={bootstrap: {initdb: [{auth-host: md5}, {auth-local: trust}]}}"
+    networks:
+      - postgres_default
+      - etcd_area_lan
+    volumes:
+      - pgdata:/home/postgres/pgdata
+    cap_add:
+      - "SYS_NICE"
+    deploy: *x-default-deploy
+    logging: *x-default-logging
+
+networks:
+  postgres_default:
+
+  etcd_area_lan:
+    name: etcd_area_lan
+    external: true
+
+volumes:
+  pgdata:
