@@ -3,9 +3,9 @@ x-deploy: &x-default-deploy
   placement:
     max_replicas_per_node: 1
     constraints:
-      - node.postgres.scope == pgsql-${DOCKER_STACK_NAME:-default}
+      - node.labels.postgres.namespace == ${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable}
     preferences:
-      - spread: node.postgres.scope
+      - spread: node.labels.postgres.namespace
   restart_policy:
     condition: on-failure
     delay: 5s
