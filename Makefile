@@ -27,7 +27,9 @@ plan:
 	docker stack config $(compose_files)
 
 deploy:
-	@env PGSQL_REPLICAS=$(service_replicas) \
+	@env \
+		DOCKER_STACK_NAME=$(docker_stack_name) \
+		PGSQL_REPLICAS=$(service_replicas) \
 	docker stack deploy $(compose_files) $(docker_stack_name)
 
 destroy:

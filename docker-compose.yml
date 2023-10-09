@@ -1,5 +1,11 @@
 x-deploy: &x-default-deploy
   replicas: ${PGSQL_REPLICAS:-3}
+  placement:
+    max_replicas_per_node: 1
+    constraints:
+      - node.postgres.scope == pgsql-${DOCKER_STACK_NAME:-default}
+    preferences:
+      - spread: node.postgres.scope
   restart_policy:
     condition: on-failure
     delay: 5s
@@ -26,6 +32,7 @@ services:
     hostname: postgres-spilo15-{{.Task.Slot}}
     env_file: .env
     environment:
+      - "SCOPE=pgsql-${DOCKER_STACK_NAME:-default}"
       - "ENABLE_PG_MON=true"
       - "PGVERSION=15"
       - "PGROOT=/home/postgres/pgdata/pgroot"
