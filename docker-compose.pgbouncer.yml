@@ -17,6 +17,8 @@ configs:
   haproxy.cfg:
     file: services/haproxy/haproxy.pgbouncer.cfg
   pgbouncer.ini:
-    file: services/pgbouncer/pgbouncer.ini
+    template_driver: golang
+    file: services/pgbouncer/pgbouncer.ini.tmpl
   userlist.txt:
-    file: services/pgbouncer/userlist.txt
+    template_driver: golang
+    file: services/pgbouncer/userlist.txt.tmpl
