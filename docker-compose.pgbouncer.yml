@@ -2,14 +2,20 @@ services:
   postgres:
     environment:
       - "PGBOUNCER_CONFIGURATION=enabled"
-
     configs:
       - source: pgbouncer.ini
         target: /run/pgbouncer/pgbouncer.ini
       - source: userlist.txt
         target: /run/pgbouncer/userlist.txt
 
+  loadbalancer:
+    configs:
+      - source: haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+
 configs:
+  haproxy.cfg:
+    file: services/haproxy/haproxy.pgbouncer.cfg
   pgbouncer.ini:
     file: services/pgbouncer/pgbouncer.ini
   userlist.txt:
