@@ -1,0 +1,11 @@
+services:
+  postgres:
+    environment:
+      - "PGBOUNCER_CONFIGURATION=enabled"
+#     configs:
+#       - source: pgbouncer.ini
+#         target: /run/pgbouncer/pgbouncer.ini
+
+# configs:
+#   pgbouncer.ini:
+#     file: services/pgbouncer/pgbouncer.ini

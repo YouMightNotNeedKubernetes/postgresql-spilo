@@ -1,0 +1,41 @@
+x-deploy: &x-default-deploy
+  replicas: ${PGSQL_LOADBALANCER_REPLICAS:-3}
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    max_attempts: 3
+    window: 120s
+  update_config:
+    parallelism: 1
+    delay: 10s
+    order: stop-first
+  rollback_config:
+    parallelism: 1
+    delay: 10s
+    order: stop-first
+
+x-logging: &x-default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  loadbalancer:
+    image: haproxytech/haproxy-alpine:latest
+    networks:
+      - postgres_default
+    ports:
+      - 5000:5000 # pgsql_master
+      - 5001:5001 # pgsql_replicas
+      - 8008:8008 # pgsql_spilo_api
+      - 8404:8404 # stats
+    configs:
+      - source: haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+    deploy: *x-default-deploy
+    logging: *x-default-logging
+
+configs:
+  haproxy.cfg:
+    file: services/haproxy/haproxy.cfg

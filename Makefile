@@ -1,6 +1,17 @@
 docker_stack_name := pgsql
 service_replicas := 3
+
+loadbalancer := false
+pgbouncer := false
 compose_files := -c docker-compose.yml
+
+ifeq ($(loadbalancer),true)
+	compose_files += -c docker-compose.loadbalancer.yml
+endif
+
+ifeq ($(pgbouncer),true)
+	compose_files += -c docker-compose.pgbouncer.yml
+endif
 
 ifneq ("$(wildcard docker-compose.override.yml)","")
 	compose_files += -c docker-compose.override.yml
@@ -11,6 +22,9 @@ it: env
 
 env:
 	@test -f .env || cp .env.example .env
+
+plan:
+	docker stack config $(compose_files)
 
 deploy:
 	@env PGSQL_REPLICAS=$(service_replicas) \
