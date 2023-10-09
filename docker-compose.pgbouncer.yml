@@ -6,7 +6,11 @@ services:
     configs:
       - source: pgbouncer.ini
         target: /run/pgbouncer/pgbouncer.ini
+      - source: userlist.txt
+        target: /run/pgbouncer/userlist.txt
 
 configs:
   pgbouncer.ini:
     file: services/pgbouncer/pgbouncer.ini
+  userlist.txt:
+    file: services/pgbouncer/userlist.txt
