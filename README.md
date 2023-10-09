@@ -3,6 +3,8 @@ PostgreSQL High Availability with patroni/spilo for Docker Swarm
 
 ## Getting Started
 
+You should only have PostgreSQL cluster deployed once per Docker Swarm Cluster.
+
 You need to have a Docker Swarm cluster up and running and etcd cluster running.
 
 > See https://github.com/YouMightNotNeedKubernetes/etcd for instructions on how to setup an etcd cluster.
@@ -26,11 +28,7 @@ Here are some useful tips to help you plan your deployment.
 
 ### Server placement
 
-A `node.labels.postgres.${namespace}` label is used to determine which nodes the PostgreSQL server can be deployed on.
-
-> [!IMPORTANT]
-> The `${namespace}` can be anything you want, but it must be the same for all nodes.
-> Please DO NOT mix namespaces from different PostgreSQL clusters.
+A `node.labels.postgres` label is used to determine which nodes the PostgreSQL server can be deployed on.
 
 The deployment uses both placement **constraints** & **preferences** to ensure that the servers are spread evenly across the Docker Swarm manager nodes and only **ALLOW** one replica per node.
 
@@ -56,9 +54,9 @@ Repeat this step for each node you want to deploy PostgreSQL server to. Make sur
 # Please DO NOT mix namespaces from different PostgreSQL clusters.
 namespace=pgsql
 
-docker node update --label-add postgres.${namespace}=true <node-1>
-docker node update --label-add postgres.${namespace}=true <node-2>
-docker node update --label-add postgres.${namespace}=true <node-3>
+docker node update --label-add postgres=true <node-1>
+docker node update --label-add postgres=true <node-2>
+docker node update --label-add postgres=true <node-3>
 ```
 
 ## FAQs

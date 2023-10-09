@@ -3,9 +3,9 @@ x-deploy: &x-default-deploy
   placement:
     max_replicas_per_node: 1
     constraints:
-      - node.labels.postgres.${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable} == true
+      - node.labels.postgres == true
     preferences:
-      - spread: node.labels.postgres.${DOCKER_STACK_NAME}
+      - spread: node.labels.postgres
   restart_policy:
     condition: on-failure
     delay: 5s
@@ -32,7 +32,7 @@ services:
     hostname: postgres-spilo15-{{.Task.Slot}}
     env_file: .env
     environment:
-      - "SCOPE=pgsql-${DOCKER_STACK_NAME:-default}"
+      - "SCOPE=pgsql"
       - "ENABLE_PG_MON=true"
       - "PGVERSION=15"
       - "PGROOT=/home/postgres/pgdata/pgroot"
@@ -42,7 +42,7 @@ services:
       - postgres_default
       - etcd_area_lan
     volumes:
-      - pgdata:/home/postgres/pgdata
+      - postgres_data:/home/postgres/pgdata
     cap_add:
       - "SYS_NICE"
     deploy: *x-default-deploy
@@ -56,6 +56,6 @@ networks:
     external: true
 
 volumes:
-  pgdata:
-    name: ${DOCKER_STACK_NAME}_pgdata
+  postgres_data:
+    name: postgres_data
     external: true
