@@ -3,9 +3,9 @@ x-deploy: &x-default-deploy
   placement:
     max_replicas_per_node: 1
     constraints:
-      - node.labels.postgres.namespace == ${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable}
+      - node.labels.postgres.${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable} == true
     preferences:
-      - spread: node.labels.postgres.namespace
+      - spread: node.labels.postgres.${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable}
   restart_policy:
     condition: on-failure
     delay: 5s
