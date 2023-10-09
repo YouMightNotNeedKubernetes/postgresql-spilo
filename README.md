@@ -1,5 +1,5 @@
 # postgresql-patroni
-Postgres High Availability with Patroni for Docker Swarm
+Postgres High Availability with patroni/spilo for Docker Swarm
 
 ## Getting Started
 
