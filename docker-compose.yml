@@ -5,7 +5,7 @@ x-deploy: &x-default-deploy
     constraints:
       - node.labels.postgres.${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable} == true
     preferences:
-      - spread: node.labels.postgres.${DOCKER_STACK_NAME:?Please set DOCKER_STACK_NAME environment variable}
+      - spread: node.labels.postgres.${DOCKER_STACK_NAME}
   restart_policy:
     condition: on-failure
     delay: 5s
@@ -57,3 +57,5 @@ networks:
 
 volumes:
   pgdata:
+    name: ${DOCKER_STACK_NAME}_pgdata
+    external: true
