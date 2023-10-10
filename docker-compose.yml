@@ -29,7 +29,7 @@ x-logging: &x-default-logging
 services:
   postgres:
     image: ghcr.io/zalando/spilo-15:3.0-p1
-    hostname: postgres-spilo15-{{.Task.Slot}}
+    hostname: postgres-{{.Task.Slot}}
     env_file: .env
     environment:
       - "SCOPE=pgsql"
