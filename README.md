@@ -50,10 +50,6 @@ Repeat this step for each node you want to deploy PostgreSQL server to. Make sur
 
 **Example PostgreSQL with 3 replicas**:
 ```sh
-# The namespace can be anything you want, but it must be the same for all nodes.
-# Please DO NOT mix namespaces from different PostgreSQL clusters.
-namespace=pgsql
-
 docker node update --label-add postgres=true <node-1>
 docker node update --label-add postgres=true <node-2>
 docker node update --label-add postgres=true <node-3>
