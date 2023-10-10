@@ -36,4 +36,4 @@ destroy:
 	docker stack rm $(docker_stack_name)
 
 scale:
-	docker service scale $(docker_stack_name)_pgsql=$(service_replicas)
+	docker service scale $(docker_stack_name)_postgres=$(service_replicas)
