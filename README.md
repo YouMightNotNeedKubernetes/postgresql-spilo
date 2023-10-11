@@ -1,6 +1,21 @@
 # postgresql-patroni
 PostgreSQL High Availability with patroni/spilo for Docker Swarm
 
+## PostgreSQL
+The World's Most Advanced Open Source Relational Database
+
+https://www.postgresql.org/
+
+## patroni
+A template for PostgreSQL High Availability with Etcd, Consul, ZooKeeper, or Kubernetes
+
+https://github.com/zalando/patroni
+
+## spilo
+Highly available elephant herd: HA PostgreSQL cluster using Docker
+
+https://github.com/zalando/spilo
+
 ## Getting Started
 
 You need to have a Docker Swarm cluster up and running and etcd cluster running.
