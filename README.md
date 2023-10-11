@@ -3,9 +3,11 @@ PostgreSQL High Availability with patroni/spilo for Docker Swarm
 
 ## Getting Started
 
+You need to have a Docker Swarm cluster up and running and etcd cluster running.
+
 You should only have PostgreSQL cluster deployed once per Docker Swarm Cluster.
 
-You need to have a Docker Swarm cluster up and running and etcd cluster running.
+You need to deploy PostgreSQL cluster along with the etcd cluster.
 
 > See https://github.com/YouMightNotNeedKubernetes/etcd for instructions on how to setup an etcd cluster.
 
