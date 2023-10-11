@@ -28,7 +28,7 @@ Here are some useful tips to help you plan your deployment.
 
 ### Server placement
 
-A `node.labels.postgres` label is used to determine which nodes the PostgreSQL server can be deployed on.
+A `node.labels.postgres` label is used to determine which nodes the service can be deployed on.
 
 The deployment uses both placement **constraints** & **preferences** to ensure that the servers are spread evenly across the Docker Swarm nodes and only **ALLOW** one replica per node.
 
