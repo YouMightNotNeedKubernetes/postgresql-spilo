@@ -21,9 +21,12 @@ services:
       replicas: ${PGSQL_LOADBALANCER_REPLICAS:-3}
     logging: *x-default-logging
 
-  postgres:
-    deploy:
-      endpoint_mode: dnsrr
+  # postgres:
+  #   deploy:
+  #     endpoint_mode: dnsrr
+
+networks:
+  postgres_default:
 
 configs:
   haproxy.cfg:
