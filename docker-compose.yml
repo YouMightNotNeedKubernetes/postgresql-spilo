@@ -53,10 +53,10 @@ services:
     networks:
       - postgres_default
     ports:
-      - "5432:5000" # pgsql_master
-      - "5433:5001" # pgsql_replicas
-      - "5480:8008" # pgsql_spilo_api
-      - "5484:8404" # stats
+      - "${PGSQL_MASTER_PORT:-5432}:5000" # pgsql_master
+      - "${PGSQL_REPLICAS_PORT:-5433}:5001" # pgsql_replicas
+      - "${PGSQL_SPILO_PORT:-5480}:8008" # pgsql_spilo_api
+      - "${PGSQL_STATS_PORT:-5484}:8404" # stats
     configs:
       - source: haproxy.cfg
         target: /usr/local/etc/haproxy/haproxy.cfg

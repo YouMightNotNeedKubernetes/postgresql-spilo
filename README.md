@@ -93,10 +93,18 @@ $ make destroy
 
 ## Ports
 
-- `5432`: The port for `postgres_rw` instance (Primary).
-- `5433`: The port for `postgres_ro` instance (Replica).
-- `5480`: The port for accessing Spilo API.
-- `5484`: The port for HAProxy stats.
+- `5432`: The port for `postgres_rw` instance (Primary).  
+    Port can be configured via `PGSQL_MASTER_PORT` env
+
+- `5433`: The port for `postgres_ro` instance (Replica).  
+    Port can be configured via `PGSQL_REPLICAS_PORT` env
+
+- `5480`: The port for accessing Spilo API.  
+    Port can be configured via `PGSQL_SPILO_PORT` env
+
+- `5484`: The port for HAProxy stats.  
+    Port can be configured via `PGSQL_STATS_PORT` env
+
 
 ## FAQs
 
