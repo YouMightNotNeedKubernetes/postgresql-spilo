@@ -94,7 +94,7 @@ $ make destroy
 ## Ports
 
 - `5432`: The port for `postgres_rw` instance (Primary).  
-    Port can be configured via `PGSQL_MASTER_PORT` env
+    Port can be configured via `PGSQL_PRIMARY_PORT` env
 
 - `5433`: The port for `postgres_ro` instance (Replica).  
     Port can be configured via `PGSQL_REPLICAS_PORT` env
