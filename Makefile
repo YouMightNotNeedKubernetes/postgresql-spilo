@@ -5,10 +5,6 @@ loadbalancer := false
 pgbouncer := false
 compose_files := -c docker-compose.yml
 
-ifeq ($(loadbalancer),true)
-	compose_files += -c docker-compose.loadbalancer.yml
-endif
-
 ifeq ($(pgbouncer),true)
 	compose_files += -c docker-compose.pgbouncer.yml
 endif
