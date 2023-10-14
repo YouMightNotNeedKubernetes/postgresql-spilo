@@ -93,10 +93,10 @@ $ make destroy
 
 ## Ports
 
-- `55000`: The port for `postgres_rw` instance (Primary).
-- `55001`: The port for `postgres_ro` instance (Replica).
-- `58008`: The port for accessing Spilo API.
-- `58404`: The port for HAProxy stats.
+- `5432`: The port for `postgres_rw` instance (Primary).
+- `5433`: The port for `postgres_ro` instance (Replica).
+- `5480`: The port for accessing Spilo API.
+- `5484`: The port for HAProxy stats.
 
 ## FAQs
 
