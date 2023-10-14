@@ -72,6 +72,32 @@ docker node update --label-add postgres=true <node-2>
 docker node update --label-add postgres=true <node-3>
 ```
 
+## Deployment
+
+Please configure the `.env` file before deploying the stack.
+
+To deploy the stack, run the following command:
+
+```sh
+$ make deploy
+# or enable pgBouncer
+$ make deploy pgbouncer=true
+```
+
+## Destroy
+
+To destroy the stack, run the following command:
+```
+$ make destroy
+```
+
+## Ports
+
+- `55000`: The port for `postgres_rw` instance (Primary).
+- `55001`: The port for `postgres_ro` instance (Replica).
+- `58008`: The port for accessing Spilo API.
+- `58404`: The port for HAProxy stats.
+
 ## FAQs
 
 ### Official Spilo deployment
