@@ -61,7 +61,7 @@ services:
       - source: haproxy.cfg
         target: /usr/local/etc/haproxy/haproxy.cfg
     deploy:
-      replicas: ${PGSQL_LOADBALANCER_REPLICAS:-3}
+      replicas: ${PGSQL_LOADBALANCER_REPLICAS:-1}
     logging: *x-default-logging
 
 networks:
